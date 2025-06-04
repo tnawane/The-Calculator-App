@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>The Calculator App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+    <table border="1" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="4">
+                <input type="text" id="inputBox" value="0"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="digitButton" onclick="digitBtnPressed('7')">7</td>
+            <td class="digitButton" onclick="digitBtnPressed('8')">8</td>
+            <td class="digitButton" onclick="digitBtnPressed('9')">9</td>
+            <td class="operatorButton" onclick="operatorBtnPressed('x')">x</td>
+        </tr>
+        <tr>
+            <td class="digitButton" onclick="digitBtnPressed('4')">4</td>
+            <td class="digitButton" onclick="digitBtnPressed('5')">5</td>
+            <td class="digitButton" onclick="digitBtnPressed('6')">6</td>
+            <td class="operatorButton" onclick="operatorBtnPressed('-')">-</td>
+        </tr>
+        <tr>
+            <td class="digitButton" onclick="digitBtnPressed('1')">1</td>
+            <td class="digitButton" onclick="digitBtnPressed('2')">2</td>
+            <td class="digitButton" onclick="digitBtnPressed('3')">3</td>
+            <td class="operatorButton" onclick="operatorBtnPressed('+')">+</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="digitButton" onclick="digitBtnPressed('0')">0</td>
+            
+            <td class="operatorButton" onclick="operatorBtnPressed('AC')">AC</td>
+            <td class="operatorButton" onclick="operatorBtnPressed('/')">/</td>
+        </tr>
+        <tr>
+            
+            <td colspan="4">
+                <button id="equalBtn" onclick="operatorBtnPressed('=')">=</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <script>
+        var newline = true;
+        
+        // Function to handle digit button presses
+        function digitBtnPressed(button){
+            var currentValue = document.getElementById("inputBox").value;
+            if (document.getElementById("inputBox").value === '0'&& newline) {
+                document.getElementById("inputBox").value = button;
+                newline = false;
+            } else {
+                document.getElementById("inputBox").value += button;
+
+            }
+        } 
+        // Function to handle operator button presses
+        function operatorBtnPressed(button){
+            let inputBox = document.getElementById("inputBox");
+            switch(button) {
+                case 'x':
+                    inputBox.value += '*';
+                    break;
+                case 'AC':
+                    inputBox.value = '0';
+                    newline = true;
+                    break;
+                case '=':
+                    try {
+                        inputBox.value = eval(inputBox.value);
+                    } catch (e) {
+                        inputBox.value = 'Error';
+                    }
+                    break;
+                case '/':
+                    inputBox.value += '/';
+                    break;
+                default:
+                    inputBox.value += button;
+            }
+            
+        }
+    </script>
+    
+</body>
+</html>
